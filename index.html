@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>WerTigo</title>
+
+        <!-- FONT AWESOME -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" class="stylesheet">
+         <link rel="stylesheet" 
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Main CSS-->
+        <link rel="stylesheet" href="style.css">
+
+        
+    </head>
+    <body>
+
+        <section class="index" id="index">
+        <header class="header">
+            <a href="home.html" class="logo" id="menu"><span> WerTigo </span></a>
+           
+            <i class="fa-solid fa-bars" id="menu-icon"></i>
+            <nav class="navbar">
+               <a href="home.html" class="active"><span>Home </span></a>
+               <a href="#about"> <span>About</span></a>
+               <a href="#services"> <span>Services</span> </a>
+               <a href="#contact"> <span>Contact</span></a>
+            </nav>
+        </header>
+
+    </section>
+
+
+    <!-- Right Side -->
+
+    
+    <div class="right-panel">
+        <div class="navigation">
+            <div></div> <!-- Empty div for layout -->
+            <div class="iti">
+            <img src="NAV.png" height="90%" width="90%" class="nav-pic">
+            <br>
+            <br>
+            <br>
+            
+            <p>Day 1</p>
+            <p>------------------------------------</p>
+            <br>
+            <p>Picnic grove-----P50</p>
+            <br>
+            <p>Sky Ranch-------P300-P500</p>
+            <br>
+            <p>Total:    P550</p>
+            </div>
+            <!--
+            <div class="right-links">
+                <a href="#" class="link">For Partners</a>
+                <span class="link">PHP</span>
+                <button class="sign-up-btn">Sign up to save</button>
+            </div>
+        </div>
+        
+        <div class="right-panel-content">
+            <h1 class="heading">YOUR TRAVEL AI GENIUS</h1>
+            <p class="subheading">Got a vacation coming up? Start here by asking me anything about it.</p>
+            
+            <div class="slider-navigation">
+                <span class="arrow-icon">◀</span>
+                <div class="slider-dots">
+                    <div class="dot"></div>
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+        <div class="chat-button" id="chatButton">
+            <i class="fas fa-comments"></i>
+        </div>
+    
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-header" id="chatHeader">
+                <div class="chat-header-info">
+                    <div class="logo">WerTigo</div>
+                    <div class="tagline">Now what is your plan?</div>
+                </div>
+                <div class="chat-header-actions">
+                    <button class="header-button" id="minimizeButton">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="header-button" id="closeButton">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-avatar">
+                    </div>
+                    <div class="message-content">
+                        Awesome! Let's get this travel party started! <br><br>
+                        To whip up your perfect trip, I just need a few details:
+                        <ol class="numbered-list">
+                            <li>Destination: <span>Where are we heading?</span></li>
+                            <li>Travel Dates: <span>When are you planning to go?</span></li>
+                            <li>Number of Travelers: <span>How many people are joining the fun?</span></li>
+                            <li>Budget: <span>Got a budget in mind?</span></li>
+                            <li>Interests: <span>Any specific activities or experiences you want to include? (e.g., adventure, relaxation, culture, food, etc.)</span></li>
+                        </ol>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <button class="create-trip-btn" id="createTripBtn">
+                create a new trip
+            </button>
+            
+            <div class="chat-input-container">
+                <div class="chat-input">
+                    <input type="text" id="userInput" placeholder="Ask anything, the more you share the better I can help..." />
+                    <button class="send-button" id="sendButton">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="quick-replies">
+                    <button class="quick-reply-btn" data-text="I have a destination">I have a destination</button>
+                    <button class="quick-reply-btn" data-text="I need travel dates">I need travel dates</button>
+                    <button class="quick-reply-btn" data-text="Tell me about activities">Tell me about activities</button>
+                </div>
+            </div>
+        </div>
+    
+    
+
+        <script>
+              // DOM Elements
+  const chatButton = document.getElementById('chatButton');
+  const chatContainer = document.getElementById('chatContainer');
+  const minimizeButton = document.getElementById('minimizeButton');
+  const closeButton = document.getElementById('closeButton');
+  const chatMessages = document.getElementById('chatMessages');
+  const userInput = document.getElementById('userInput');
+  const sendButton = document.getElementById('sendButton');
+  const createTripBtn = document.getElementById('createTripBtn');
+  const quickReplyBtns = document.querySelectorAll('.quick-reply-btn');
+
+  // Demo responses for a travel assistant
+  const botResponses = [
+      "Great choice! {destination} is amazing this time of year. Do you have specific dates in mind?",
+      "I'd recommend spending at least 4-5 days in {destination} to really experience it properly. What kind of activities are you interested in?",
+      "For {destination} with {travelers} travelers, I'd budget around $1,500-$2,500 per person, depending on your accommodation preferences and activities. Does that work with your budget?",
+      "If you love {interest}, {destination} has some incredible options! I recommend checking out their famous {attraction} which is perfect for {interest} enthusiasts.",
+      "Based on your interests in {interest}, I think you'd love visiting during {season} when the weather is perfect and the crowds are smaller.",
+      "I can help you create a customized itinerary with all the best {interest} experiences in {destination}. When would you like to travel?"
+  ];
+
+  // Functions
+  function toggleChat() {
+      if (chatContainer.classList.contains('closed')) {
+          chatContainer.style.display = 'flex';
+          chatContainer.classList.remove('closed');
+          chatButton.style.display = 'none';
+      } else {
+          chatContainer.style.display = 'none';
+          chatContainer.classList.add('closed');
+          chatButton.style.display = 'flex';
+      }
+  }
+
+  function addMessage(content, isUser = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+      
+      const avatarDiv = document.createElement('div');
+      avatarDiv.className = 'message-avatar';
+      
+      if (isUser) {
+          const iconElement = document.createElement('i');
+          iconElement.className = 'fas fa-user';
+          iconElement.style.color = 'white';
+          iconElement.style.fontSize = '16px';
+          avatarDiv.appendChild(iconElement);
+      } else {
+          const imgElement = document.createElement('img');
+          imgElement.src = '';
+          imgElement.alt = '';
+          avatarDiv.appendChild(imgElement);
+      }
+      
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'message-content';
+      contentDiv.innerHTML = content;
+      
+      messageDiv.appendChild(avatarDiv);
+      messageDiv.appendChild(contentDiv);
+      
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function showTypingIndicator() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'message bot';
+      typingDiv.id = 'typingIndicator';
+      
+      const avatarDiv = document.createElement('div');
+      avatarDiv.className = 'message-avatar';
+      
+      const imgElement = document.createElement('img');
+      imgElement.src = '';
+      imgElement.alt = '';
+      avatarDiv.appendChild(imgElement);
+      
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'message-content';
+      contentDiv.innerHTML = '<div style="display: flex; gap: 4px; align-items: center; height: 20px;">' +
+          '<div style="width: 8px; height: 8px; background-color: #999; border-radius: 50%; animation: typing-animation 1.4s infinite ease-in-out;"></div>' +
+          '<div style="width: 8px; height: 8px; background-color: #999; border-radius: 50%; animation: typing-animation 1.4s infinite ease-in-out; animation-delay: 0.2s;"></div>' +
+          '<div style="width: 8px; height: 8px; background-color: #999; border-radius: 50%; animation: typing-animation 1.4s infinite ease-in-out; animation-delay: 0.4s;"></div>' +
+          '</div>';
+      
+      typingDiv.appendChild(avatarDiv);
+      typingDiv.appendChild(contentDiv);
+      
+      chatMessages.appendChild(typingDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function removeTypingIndicator() {
+      const typingIndicator = document.getElementById('typingIndicator');
+      if (typingIndicator) {
+          typingIndicator.remove();
+      }
+  }
+
+  function getRandomResponse(message) {
+      // Simplified for demo - would normally use NLP to extract entities
+      let response = botResponses[Math.floor(Math.random() * botResponses.length)];
+      
+      // Replace placeholders with demo values
+      let destinations = ['Paris', 'Bali', 'New York', 'Tokyo', 'Rome'];
+      let interests = ['hiking', 'food tours', 'museums', 'beach activities', 'nightlife'];
+      let attractions = ['Eiffel Tower', 'rice terraces', 'Central Park', 'Shibuya Crossing', 'Colosseum'];
+      let seasons = ['spring', 'summer', 'fall', 'winter'];
+      
+      response = response.replace('{destination}', destinations[Math.floor(Math.random() * destinations.length)]);
+      response = response.replace('{interest}', interests[Math.floor(Math.random() * interests.length)]);
+      response = response.replace('{attraction}', attractions[Math.floor(Math.random() * attractions.length)]);
+      response = response.replace('{season}', seasons[Math.floor(Math.random() * seasons.length)]);
+      response = response.replace('{travelers}', Math.floor(Math.random() * 4) + 2);
+      
+      return response;
+  }
+
+  function sendMessage(message = null) {
+      const userMessage = message || userInput.value.trim();
+      if (userMessage === '') return;
+      
+      // Add user message
+      addMessage(userMessage, true);
+      userInput.value = '';
+      
+      // Show typing indicator
+      showTypingIndicator();
+      
+      // Simulate bot response after delay (replace with actual API call)
+      setTimeout(() => {
+          removeTypingIndicator();
+          addMessage(getRandomResponse(userMessage));
+      }, 1500);
+  }
+
+  function handleCreateTrip() {
+      addMessage("I'd love to help you create a new trip! Where would you like to go?", false);
+  }
+
+  // Event Listeners
+  chatButton.addEventListener('click', toggleChat);
+  closeButton.addEventListener('click', toggleChat);
+  
+  sendButton.addEventListener('click', () => sendMessage());
+  userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+          sendMessage();
+      }
+  });
+  
+  createTripBtn.addEventListener('click', handleCreateTrip);
+  
+  quickReplyBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+          sendMessage(btn.dataset.text);
+      });
+  });
+
+  // Add CSS animation for typing indicator
+  const style = document.createElement('style');
+  style.innerHTML = `
+      @keyframes typing-animation {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.5); }
+          100% { transform: scale(1); }
+      }
+  `;
+  document.head.appendChild(style);
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Slider functionality
+    const dots = document.querySelectorAll('.dot');
+    const arrowIcon = document.querySelector('.arrow-icon');
+    let currentSlide = 1; // Since the second dot is active initially
+    
+    // Function to update active dot
+    function updateActiveDot(index) {
+        dots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+    
+    // Event listeners for dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            currentSlide = index;
+            updateActiveDot(currentSlide);
+        });
+    });
+    
+    // Arrow navigation
+    arrowIcon.addEventListener('click', function() {
+        currentSlide = (currentSlide - 1 + dots.length) % dots.length; // Go backwards
+        updateActiveDot(currentSlide);
+    });
+    
+    // Sign up button functionality
+    const signUpBtn = document.querySelector('.sign-up-btn');
+    signUpBtn.addEventListener('click', function() {
+        // Replace with your sign up functionality
+        alert('Sign up functionality goes here!');
+    });
+    
+    // For example, you might want to have some AI chat functionality
+    function initAIChat() {
+        // Initialize AI chat interface
+        console.log('Travel AI assistant initialized');
+        
+        // This is where you would add code to handle user input
+        // and AI responses for your travel assistant
+    }
+    
+    // Call initialization functions
+    initAIChat();
+});
+        </script>
+
+
+       
+    </body>
+</html>
